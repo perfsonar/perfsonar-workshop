@@ -1,0 +1,20 @@
+# This a base playbook to install different perfSONAR flavours on a set of machine
+---
+
+# This first task can be replaced by any other provisioning setup
+# you're using on your infrastructure.
+- name: Bootstrap Ansible on all hosts
+  hosts: all
+  become: True
+  gather_facts: False
+  roles:
+    - role: bootstrap
+      tags: 'bootstrap'
+
+# From here on, these are perfSONAR related tasks
+- name: Install and configure perfSONAR testpoint
+  hosts: ps-testpoint
+  become: True
+  roles:
+    - role: perfsonar-testpoint
+
