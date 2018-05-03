@@ -1,5 +1,5 @@
-[submodule "roles/perfsonar-testppoint"]
-	path = roles/perfsonar-testppoint
+[submodule "roles/perfsonar-testpoint"]
+	path = roles/perfsonar-testpoint
 	url = https://github.com/perfsonar/ansible-role-perfsonar-testpoint.git
 [submodule "roles/bootstrap"]
 	path = roles/bootstrap

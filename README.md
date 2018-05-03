@@ -45,7 +45,10 @@ Examples,
 Dependencies
 ------------
 
-The perfsonar-testpoint and perfsonar-toolkit roles as well as the bootstrap role from Robert De Bock are dependencies to this setup.  Git submodules are provided to make for an easy starting point.
+The perfsonar-testpoint and perfsonar-toolkit roles as well as the bootstrap role from Robert De Bock are dependencies to this setup.  Git submodules are provided to make for an easy starting point.  This means you have 2 different ways to use this setup:
+
+  - use the git submodules, by running `git submodule init; git submodule update` after cloning this repo
+  - use Ansible Galaxy (when the perfsonar roles will be published there…)
 
 License
 -------
