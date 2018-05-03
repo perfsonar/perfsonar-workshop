@@ -12,9 +12,15 @@
       tags: 'bootstrap'
 
 # From here on, these are perfSONAR related tasks
-- name: Install and configure perfSONAR testpoint
+- name: Install and configure perfSONAR testpoint nodes
   hosts: ps-testpoint
   become: True
   roles:
     - role: perfsonar-testpoint
+
+- name: Install and configure perfSONAR toolkit nodes
+  hosts: ps-toolkit
+  become: True
+  roles:
+    - role: perfsonar-toolkit
 
