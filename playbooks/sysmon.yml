@@ -1,0 +1,49 @@
+# General system monitoring informations playbook
+# Mostly uses information from ansible setup
+---
+
+- name: Gather and display interesting system informations
+  hosts: all
+  become: False
+  vars:
+    - percent_disk_space: 0.8
+
+  tasks:
+    - name: Collecting uptime information
+      shell: uptime
+      register: uptime
+      changed_when: False
+
+    - name: Checking used disk space is below 80%
+      assert:
+        that:
+          - "not {{ item.size_available < item.size_total - (item.size_total|float * percent_disk_space) }}"
+        msg: "Disk is nearly full: {{ item.mount }}"
+      with_items: "{{ ansible_mounts }}"
+      ignore_errors: True
+      no_log: True
+      register: disk_free
+
+    - name: Collecting all disk information
+      shell: echo '   ❗️ Check this host disk space ❗️   '; df -lHPT
+      register: df
+      changed_when: False
+      when: disk_free|failed
+
+    - name: Check running kernel version
+      shell: kin=$(rpm -q kernel|tail -n 1|sed 's/^kernel-//'); if [ $kin != $(uname -r) ]; then echo "❗️ Pending update to $kin"; fi
+      ignore_errors: True
+      register: kernel_update
+      changed_when: False
+
+    - name: System information 🚀
+      vars:
+        msg: |
+          🖥  {{ansible_fqdn}}  💣 {{uptime.stdout}}
+          📀 {{ansible_distribution}}-{{ansible_distribution_major_version}}  ⚙️  {{ansible_processor_cores}} cores  💾 {{ansible_kernel}} {{kernel_update.stdout}}
+          📜 Memory (free/total in MB): {{ansible_memfree_mb}}/{{ansible_memtotal_mb}} (Swap: {{ansible_swapfree_mb}}/{{ansible_swaptotal_mb}})
+      debug:
+        msg:
+          - "{{ msg[:-1].split('\n') + (df.stdout_lines | default([])) }}"
+
+
