@@ -24,3 +24,7 @@
   roles:
     - role: perfsonar-toolkit
 
+# TODO:
+  # add some measurements
+  # setup central server
+  # add meshconfig
