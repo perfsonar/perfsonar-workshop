@@ -1,36 +1,18 @@
 # perfSONAR hosts inventory for AIS18
 
 [all]
-ais18-1         ansible_ssh_host=86.119.40.244          ansible_user=debian
-ais18-2         ansible_ssh_host=86.119.41.243          ansible_user=debian
-ais18-3         ansible_ssh_host=86.119.41.54           ansible_user=debian
-ais18-4         ansible_ssh_host=86.119.40.102          ansible_user=debian
-ais18-5         ansible_ssh_host=86.119.41.248          ansible_user=debian
-ais18-6         ansible_ssh_host=86.119.41.247          ansible_user=debian
-ais18-7         ansible_ssh_host=86.119.41.246          ansible_user=debian
-ais18-8         ansible_ssh_host=86.119.40.248          ansible_user=debian
+edupert-1       ansible_ssh_host=86.119.36.246          ansible_user=debian
+edupert-2       ansible_ssh_host=86.119.37.106          ansible_user=debian
 
 [ps-testpoint]
 
 [ps-toolkit]
-ais18-1
-ais18-2
-ais18-3
-ais18-4
-ais18-5
-ais18-6
-ais18-7
-ais18-8
+edupert-1
+edupert-2
 
 [ps-central]
 
 [switch-engines]
-ais18-1
-ais18-2
-ais18-3
-ais18-4
-ais18-5
-ais18-6
-ais18-7
-ais18-8
+edupert-1
+edupert-2
 

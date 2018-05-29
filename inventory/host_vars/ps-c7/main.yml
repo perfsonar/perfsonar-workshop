@@ -1,6 +1,8 @@
 # ps-c7 specific variables
 ---
-
 # Do not disable root ssh on this host because this is the only access we have
 perfsonar_disable_root_ssh: False
+
+# We want to run the packages from the nightly repo
+perfsonar_release: nightly
 
