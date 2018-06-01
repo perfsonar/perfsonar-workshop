@@ -1,0 +1,32 @@
+# Make xterm scrolling work properly with screen.
+termcapinfo xterm*|xs|rxvt ti@:te@
+defscrollback 10000
+# No startup message
+startup_message off
+# And no visual bell
+vbell off
+# Use alternate screen to display man pages, less output, etc.
+altscreen on
+# 1st screen window is a bash shell with regular user
+screen 1 bash
+# 2nd screen window is a superuser bash shell
+screen -t root 2 sudo bash
+# Bind ctrl-a c to creating screen window number 1, to avoid using window 0 which confuses me
+bind c screen 1
+
+# The following 3 are needed under FreeBSD
+# Correcting bold mode
+termcapinfo xterm*|screen* ':md=\E[1m'
+# Correcting blinking mode
+termcapinfo xterm*|screen* ':mb=\E[5m'
+# Correcting half-bright mode
+termcapinfo xterm*|screen* ':mh=\E[2m'
+
+# Status line
+hardstatus alwayslastline
+hardstatus string '%{= kg}[ %{Y}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%?%{w}%+Lw%?%= %{g}][ %{W}%l %{g}-%{b} %d-%m %{W} %c %{g}]'
+
+# Use a proper TERM definition
+term screen-256color
+
+#redisplay

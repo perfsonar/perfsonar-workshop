@@ -10,6 +10,10 @@ edupert-2       ansible_ssh_host=86.119.37.106          ansible_user=debian
 edupert-1
 edupert-2
 
+[ps-toolkit-beta]
+#beta-1
+#beta-2
+
 [ps-central]
 
 [switch-engines]

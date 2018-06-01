@@ -24,7 +24,16 @@
   roles:
     - role: perfsonar-toolkit
 
+# Some more specific config
+- name: Some more configuration of the nodes
+  hosts: all
+  become: True
+  roles:
+    - role: edupert
+      tags: 'geant'
+
 # TODO:
+  # setup password for edupert user
   # add some measurements
   # setup central server
   # add meshconfig

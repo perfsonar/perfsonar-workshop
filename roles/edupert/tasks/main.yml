@@ -1,0 +1,59 @@
+# General tasks file for the edupert role
+---
+
+# Groups and User management
+- name: Add perfSONAR groups
+  group:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - psadmin
+    - pssudo
+
+- name: Add and manage eduPERT user account
+  user:
+    name: "{{ username }}"
+    groups: [ 'psadmin', 'pssudo' ]
+    comment: "eduPERT user"
+    createhome: yes
+    state: present
+    shell: /bin/bash
+
+- name: Add ssh pub keys to eduPERT account
+  authorized_key:
+    user: "{{ username }}"
+    exclusive: yes
+    manage_dir: yes
+    key: "{{ lookup('file', 'public_keys/admins') }}"
+    state: present
+
+- name: Add useful user configuration files
+  copy:
+    src: '{{ item }}'
+    dest: '/home/{{ username }}/.{{ item }}'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+  with_items:
+    - bashrc
+    - screenrc
+
+# Add /var/www/perfsonar/workshop directory
+- name: Create /var/www/perfsonar/workshop
+  file:
+      path: /var/www/perfsonar/workshop
+      state: directory
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      mode: 0775
+
+# Add needed packages
+# gnuplot is needed by pscheduler plot-schedule command
+- name: Install additional packages for workshop
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - gnuplot
+    - vim
+
