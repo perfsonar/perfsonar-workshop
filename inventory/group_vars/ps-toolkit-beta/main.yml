@@ -1,0 +1,6 @@
+# Variables for all ps-toolkit-beta nodes
+---
+
+perfsonar_release: snapshot
+perfsonar_web_passwd: edupert
+

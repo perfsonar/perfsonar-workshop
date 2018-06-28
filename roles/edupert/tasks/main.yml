@@ -4,35 +4,40 @@
 # Groups and User management
 - name: Add perfSONAR groups
   group:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
   with_items:
     - psadmin
     - pssudo
 
-- name: Add and manage eduPERT user account
+- name: Add and manage eduPERT user account ({{ edupert_username }})
   user:
-    name: "{{ username }}"
+    name: "{{ edupert_username }}"
     groups: [ 'psadmin', 'pssudo' ]
     comment: "eduPERT user"
     createhome: yes
     state: present
     shell: /bin/bash
+    password: "{{ edupert_password }}"
+    update_password: 'always'
 
-- name: Add ssh pub keys to eduPERT account
+- name: Add ssh pub keys to eduPERT and Ansible account
   authorized_key:
-    user: "{{ username }}"
+    user: "{{ item }}"
     exclusive: yes
     manage_dir: yes
     key: "{{ lookup('file', 'public_keys/admins') }}"
     state: present
+  with_items:
+    - "{{ edupert_username }}"
+    - "{{ ansible_user }}"  
 
 - name: Add useful user configuration files
   copy:
-    src: '{{ item }}'
-    dest: '/home/{{ username }}/.{{ item }}'
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    src: "{{ item }}"
+    dest: "/home/{{ edupert_username }}/.{{ item }}"
+    owner: "{{ edupert_username }}"
+    group: "{{ edupert_username }}"
     mode: 0644
   with_items:
     - bashrc
@@ -43,17 +48,88 @@
   file:
       path: /var/www/perfsonar/workshop
       state: directory
-      owner: "{{ username }}"
-      group: "{{ username }}"
+      owner: "{{ edupert_username }}"
+      group: "{{ edupert_username }}"
       mode: 0775
 
 # Add needed packages
 # gnuplot is needed by pscheduler plot-schedule command
 - name: Install additional packages for workshop
   package:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
-  with_items:
-    - gnuplot
-    - vim
+  with_items: "{{ edupert_additional_packages }}"
+
+# Disable unattended upgrades
+- name: Disable unattended upgrades
+  lineinfile:
+    path: /etc/apt/apt.conf.d/60unattended-upgrades-perfsonar
+    state: 'absent'
+    regexp: "APT::Periodic::Unattended-Upgrade \"1\";"
+
+# Allow password access
+- name: Allow ssh password access
+  lineinfile:
+    state: present
+    path: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication "
+    line: "PasswordAuthentication yes"
+  tags: [ 'ps::config' ]
+  notify:
+    - restart ssh
+
+# Set timezone
+- name: Set timezone
+  timezone:
+    name: "{{ edupert_timezone }}"
+
+# Set hostname
+- name: Ensure hostname is well defined
+  hostname:
+    name: "{{ inventory_hostname }}.{{ edupert_domain }}"
+
+# Manage a local /etc/hosts
+- name: Add RFC-1918 and IPv6 address mappings to /etc/hosts
+  blockinfile:
+    path: /etc/hosts
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - eduPERT training"
+    block: |
+        10.0.0.177                              mp01.{{ edupert_domain }}     mp01
+        2001:620:5ca1:1f0:f816:3eff:fe80:1805   mp01.{{ edupert_domain }}     mp01
+        10.0.1.89                               mp02.{{ edupert_domain }}     mp02
+        2001:620:5ca1:1f0:f816:3eff:fe52:6dcd   mp02.{{ edupert_domain }}     mp02
+        10.0.0.48                               mp03.{{ edupert_domain }}     mp03
+        2001:620:5ca1:1f0:f816:3eff:feec:fdab   mp03.{{ edupert_domain }}     mp03
+        10.0.1.212                              mp04.{{ edupert_domain }}     mp04
+        2001:620:5ca1:1f0:f816:3eff:fed0:a74b   mp04.{{ edupert_domain }}     mp04
+        10.0.1.221                              mp05.{{ edupert_domain }}     mp05
+        2001:620:5ca1:1f0:f816:3eff:fe3d:f02f   mp05.{{ edupert_domain }}     mp05
+        10.0.0.226                              mp06.{{ edupert_domain }}     mp06
+        2001:620:5ca1:1f0:f816:3eff:fea7:924b   mp06.{{ edupert_domain }}     mp06
+        10.0.2.148                              mp07.{{ edupert_domain }}     mp07
+        2001:620:5ca1:1f0:f816:3eff:fec9:718c   mp07.{{ edupert_domain }}     mp07
+        10.0.2.136                              mp08.{{ edupert_domain }}     mp08
+        2001:620:5ca1:1f0:f816:3eff:fe5e:1769   mp08.{{ edupert_domain }}     mp08
+        10.0.2.209                              mp09.{{ edupert_domain }}     mp09
+        2001:620:5ca1:1f0:f816:3eff:fee2:39d4   mp09.{{ edupert_domain }}     mp09
+        10.0.0.139                              mp10.{{ edupert_domain }}     mp10
+        2001:620:5ca1:1f0:f816:3eff:fe0b:9d47   mp10.{{ edupert_domain }}     mp10
+        10.0.2.175                              mp11.{{ edupert_domain }}     mp11
+        2001:620:5ca1:1f0:f816:3eff:fec4:1      mp11.{{ edupert_domain }}     mp11
+        10.0.2.223                              mp12.{{ edupert_domain }}     mp12
+        2001:620:5ca1:1f0:f816:3eff:fe8b:8d7a   mp12.{{ edupert_domain }}     mp12
+        10.0.2.235                              mp13.{{ edupert_domain }}     mp13
+        2001:620:5ca1:1f0:f816:3eff:fe49:92fe   mp13.{{ edupert_domain }}     mp13
+        10.0.2.19                               mp14.{{ edupert_domain }}     mp14
+        2001:620:5ca1:1f0:f816:3eff:fe30:ec44   mp14.{{ edupert_domain }}     mp14
+        10.0.2.141                              mp15.{{ edupert_domain }}     mp15
+        2001:620:5ca1:1f0:f816:3eff:fe07:fc5a   mp15.{{ edupert_domain }}     mp15
+        10.0.1.114                              mp16.{{ edupert_domain }}     mp16
+        2001:620:5ca1:1f0:f816:3eff:feca:64d1   mp16.{{ edupert_domain }}     mp16
+        10.0.2.184                              mp17.{{ edupert_domain }}     mp17
+        2001:620:5ca1:1f0:f816:3eff:fed8:5eb    mp17.{{ edupert_domain }}     mp17
+        10.0.3.22                               mp18.{{ edupert_domain }}     mp18
+        2001:620:5ca1:1f0:f816:3eff:febe:9b0f   mp18.{{ edupert_domain }}     mp18
+        10.0.3.5                                mp19.{{ edupert_domain }}     mp19
+        2001:620:5ca1:1f0:f816:3eff:fe5d:68fd   mp19.{{ edupert_domain }}     mp19
 

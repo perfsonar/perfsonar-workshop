@@ -1,22 +1,93 @@
 # perfSONAR hosts inventory for AIS18
 
 [all]
-edupert-1       ansible_ssh_host=86.119.36.246          ansible_user=debian
-edupert-2       ansible_ssh_host=86.119.37.106          ansible_user=debian
+mp01            ansible_ssh_host=86.119.36.246          ansible_user=debian
+mp02            ansible_ssh_host=86.119.37.106          ansible_user=debian
+mp03            ansible_ssh_host=86.119.38.234          ansible_user=debian
+mp04            ansible_ssh_host=86.119.39.24           ansible_user=debian
+mp05            ansible_ssh_host=86.119.41.245          ansible_user=debian
+mp06            ansible_ssh_host=86.119.41.243          ansible_user=debian
+mp07            ansible_ssh_host=86.119.41.240          ansible_user=debian
+mp08            ansible_ssh_host=86.119.41.246          ansible_user=debian
+mp09            ansible_ssh_host=86.119.41.252          ansible_user=debian
+mp10            ansible_ssh_host=86.119.42.2            ansible_user=debian
+mp11            ansible_ssh_host=86.119.41.253          ansible_user=debian
+mp12            ansible_ssh_host=86.119.40.206          ansible_user=debian
+mp13            ansible_ssh_host=86.119.41.247          ansible_user=debian
+mp14            ansible_ssh_host=86.119.41.151          ansible_user=debian
+mp15            ansible_ssh_host=86.119.42.0            ansible_user=debian
+mp16            ansible_ssh_host=86.119.42.6            ansible_user=debian
+mp17            ansible_ssh_host=86.119.42.3            ansible_user=debian
+mp18            ansible_ssh_host=86.119.42.7            ansible_user=debian
+mp19            ansible_ssh_host=86.119.40.53           ansible_user=debian
+nagios01        ansible_ssh_host=86.119.42.10           ansible_user=centos
+nagios02        ansible_ssh_host=86.119.42.15           ansible_user=centos
+nagios03        ansible_ssh_host=86.119.42.20           ansible_user=centos
+nagios04        ansible_ssh_host=86.119.42.12           ansible_user=centos
+nagios05        ansible_ssh_host=86.119.39.93           ansible_user=centos
+nagios06        ansible_ssh_host=86.119.42.4            ansible_user=centos
+nagios07        ansible_ssh_host=86.119.42.5            ansible_user=centos
+nagios08        ansible_ssh_host=86.119.41.250          ansible_user=centos
+nagios09        ansible_ssh_host=86.119.42.16           ansible_user=centos
+nagios10        ansible_ssh_host=86.119.40.38           ansible_user=centos
 
 [ps-testpoint]
 
 [ps-toolkit]
-edupert-1
-edupert-2
+mp01
+mp02
+mp03
+mp04
+mp05
+mp06
+mp07
+mp08
+mp09
 
 [ps-toolkit-beta]
-#beta-1
-#beta-2
+mp10
+mp11
+mp12
+mp13
+mp14
+mp15
+mp16
+mp17
+mp18
+mp19
 
 [ps-central]
 
+[nagios]
+nagios01
+nagios02
+nagios03
+nagios04
+nagios05
+nagios06
+nagios07
+nagios08
+nagios09
+nagios10
+
 [switch-engines]
-edupert-1
-edupert-2
+mp01
+mp02
+mp03
+mp04
+mp05
+mp06
+mp07
+mp08
+mp09
+mp10
+mp11
+mp12
+mp13
+mp14
+mp15
+mp16
+mp17
+mp18
+mp19
 

@@ -1,4 +1,16 @@
 # defaults file for edupert role
 ---
-# Username to create on nodes
-username: edupert
+# Username to create on nodes for workshop participants
+edupert_username: edupert
+
+# Timezone for the machines
+edupert_timezone: Europe/Zurich
+
+# Additional packages to install on nodes for training
+edupert_additional_packages:
+  - gnuplot
+  - locales-all
+  - man
+  - screen
+  - vim
+

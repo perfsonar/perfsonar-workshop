@@ -1,0 +1,5 @@
+# defaults file for edupert role
+---
+# Timezone for the machines
+edupert_timezone: Europe/Zurich
+

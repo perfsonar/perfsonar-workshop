@@ -1,0 +1,4 @@
+# Some common variables for edupert machines
+---
+# Our hosts domain
+edupert_domain: 'tnc18.pert.edu'

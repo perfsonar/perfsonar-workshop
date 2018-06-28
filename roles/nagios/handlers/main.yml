@@ -1,0 +1,8 @@
+---
+# handlers file for edupert
+
+- name: restart ssh
+  service:
+    name: sshd
+    state: restarted
+
