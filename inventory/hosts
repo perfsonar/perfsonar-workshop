@@ -1,4 +1,4 @@
-# perfSONAR hosts inventory for AIS18
+# perfSONAR hosts inventory for SURFnet training
 
 [all]
 mp01            ansible_ssh_host=86.119.36.246          ansible_user=debian
@@ -20,16 +20,6 @@ mp16            ansible_ssh_host=86.119.42.6            ansible_user=debian
 mp17            ansible_ssh_host=86.119.42.3            ansible_user=debian
 mp18            ansible_ssh_host=86.119.42.7            ansible_user=debian
 mp19            ansible_ssh_host=86.119.40.53           ansible_user=debian
-nagios01        ansible_ssh_host=86.119.42.10           ansible_user=centos
-nagios02        ansible_ssh_host=86.119.42.15           ansible_user=centos
-nagios03        ansible_ssh_host=86.119.42.20           ansible_user=centos
-nagios04        ansible_ssh_host=86.119.42.12           ansible_user=centos
-nagios05        ansible_ssh_host=86.119.39.93           ansible_user=centos
-nagios06        ansible_ssh_host=86.119.42.4            ansible_user=centos
-nagios07        ansible_ssh_host=86.119.42.5            ansible_user=centos
-nagios08        ansible_ssh_host=86.119.41.250          ansible_user=centos
-nagios09        ansible_ssh_host=86.119.42.16           ansible_user=centos
-nagios10        ansible_ssh_host=86.119.40.38           ansible_user=centos
 
 [ps-testpoint]
 
@@ -57,18 +47,6 @@ mp18
 mp19
 
 [ps-central]
-
-[nagios]
-nagios01
-nagios02
-nagios03
-nagios04
-nagios05
-nagios06
-nagios07
-nagios08
-nagios09
-nagios10
 
 [switch-engines]
 mp01
