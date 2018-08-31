@@ -11,9 +11,9 @@ The deployment is meant to work with any perfSONAR supported distro:
   - CentOS: http://docs.perfsonar.net/install_centos.html
   - Debian/Ubuntu: http://docs.perfsonar.net/install_debian.html
 
-The hosts will all be managed through Ansible and for that this setup relies on the [robertdebock.bootstrap][rdbs] role to make all machines working with Ansible.  You can skip that part of the setup and provide your own privioning roles and playbooks taking care of that in your infrastructure.
+The hosts will all be managed through Ansible and for that this setup relies on a [fork][tonin-bootstrap] of the [robertdebock.bootstrap][rdbs] role to make all machines working with Ansible.  You can skip that part of the setup and provide your own provisioning roles and playbooks taking care of that in your infrastructure.
 
-The site.yml playbook also requires the perfsonar-testpoint and perfsonar-toolkit roles to be available as these are making most of the job.
+At the core of the `site.yml` playbook are the [perfsonar-testpoint][ps-testpoint] and [perfsonar-toolkit][ps-toolkit] roles which are making most of the job.
 
 Playbook Variables
 ------------------
@@ -21,7 +21,7 @@ Playbook Variables
 I usually adapt the following variables for my workshop setups:
 
   - `perfsonar_optional_packages` is the list of additional optional packages you want to install with the testpoint bundle, see [the debian list][debian-optional] and [the centos list][centos-optional] for more information.  All optional packages are installed per default.
-  - `perfsonar_ntp_servers`: depending on the place where the setup is established, I provide close enough and reliable NTP servers,
+  - `perfsonar_ntp_servers`: depending on the place where the setup is established, I use close and reliable NTP servers,
 
 Tags
 ----
@@ -45,10 +45,10 @@ Examples,
 Dependencies
 ------------
 
-The perfsonar-testpoint and perfsonar-toolkit roles as well as the bootstrap role from Robert De Bock are dependencies to this setup.  Git submodules are provided to make for an easy starting point.  This means you have 2 different ways to use this setup:
+The perfsonar-testpoint and perfsonar-toolkit roles as well as the bootstrap role are the main dependencies to this setup.  Git submodules are used to make for an easy starting point.  This means you have 2 different ways to use this setup:
 
   - use the git submodules, by running `git submodule init; git submodule update` after cloning this repo
-  - use Ansible Galaxy (when the perfsonar roles will be published there…)
+  - use Ansible Galaxy (when the perfsonar roles will be published there… which is not yet the case)
 
 License
 -------
@@ -61,6 +61,9 @@ Author Information
 I'm a [perfSONAR][ps] developer and I provide this Ansible setup for anyone having similar requirements as mine to quickly setup a workshop, training or testing perfSONAR deployment.  Feedback and PR happily received.
 
 
+[tonin-bootstrap]: https://github.com/tonin/ansible-role-bootstrap
+[ps-testpoint]: http://github.com/perfsonar/ansible-role-perfsonar-testpoint
+[ps-toolkit]: https://github.com/tonin/ansible-role-perfsonar-toolkit
 [rdbs]: https://galaxy.ansible.com/robertdebock/bootstrap/
 [debian-optional]: http://docs.perfsonar.net/install_debian.html#optional-packages
 [centos-optional]: http://docs.perfsonar.net/install_centos.html#optional-packages
