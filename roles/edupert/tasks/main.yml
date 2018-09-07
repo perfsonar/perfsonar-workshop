@@ -1,15 +1,7 @@
 # General tasks file for the edupert role
 ---
 
-# Groups and User management
-- name: Add perfSONAR groups
-  group:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - psadmin
-    - pssudo
-
+# Add a workshop specific user to be used by participants
 - name: Add and manage eduPERT user account ({{ edupert_username }})
   user:
     name: "{{ edupert_username }}"
@@ -43,31 +35,7 @@
     - bashrc
     - screenrc
 
-# Add /var/www/perfsonar/workshop directory
-- name: Create /var/www/perfsonar/workshop
-  file:
-      path: /var/www/perfsonar/workshop
-      state: directory
-      owner: "{{ edupert_username }}"
-      group: "{{ edupert_username }}"
-      mode: 0775
-
-# Add needed packages
-# gnuplot is needed by pscheduler plot-schedule command
-- name: Install additional packages for workshop
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ edupert_additional_packages }}"
-
-# Disable unattended upgrades
-- name: Disable unattended upgrades
-  lineinfile:
-    path: /etc/apt/apt.conf.d/60unattended-upgrades-perfsonar
-    state: 'absent'
-    regexp: "APT::Periodic::Unattended-Upgrade \"1\";"
-
-# Allow password access
+# Allow password access so that participants can access the machines
 - name: Allow ssh password access
   lineinfile:
     state: present
@@ -77,6 +45,23 @@
   tags: [ 'ps::config' ]
   notify:
     - restart ssh
+
+# Add /var/www/perfsonar/workshop directory
+- name: Create /var/www/perfsonar/workshop
+  file:
+      path: /var/www/perfsonar/workshop
+      state: directory
+      owner: "{{ edupert_username }}"
+      group: "{{ edupert_username }}"
+      mode: 0775
+
+# Disable unattended upgrades (most useful for snapshot/staging hosts when preparing workshop setup)
+- name: Disable unattended upgrades
+  lineinfile:
+    path: /etc/apt/apt.conf.d/60unattended-upgrades-perfsonar
+    state: 'absent'
+    regexp: "APT::Periodic::Unattended-Upgrade \"1\";"
+  when: edupert_disable_unattended_upgrades
 
 # Set timezone
 - name: Set timezone
@@ -132,4 +117,5 @@
         2001:620:5ca1:1f0:f816:3eff:febe:9b0f   mp18.{{ edupert_domain }}     mp18
         10.0.3.5                                mp19.{{ edupert_domain }}     mp19
         2001:620:5ca1:1f0:f816:3eff:fe5d:68fd   mp19.{{ edupert_domain }}     mp19
+  when: edupert_manage_hosts_file
 

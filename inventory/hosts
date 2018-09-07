@@ -1,5 +1,7 @@
-# perfSONAR hosts inventory for SURFnet training
+# This is an Ansible inventory file in INI format. You can define a list of
+# hosts and groups to be managed by this particular inventory.
 
+# Full perfSONAR hosts inventory
 [all]
 mp01            ansible_ssh_host=86.119.36.246          ansible_user=debian
 mp02            ansible_ssh_host=86.119.37.106          ansible_user=debian
@@ -10,6 +12,7 @@ mp06            ansible_ssh_host=86.119.41.243          ansible_user=debian
 mp07            ansible_ssh_host=86.119.41.240          ansible_user=debian
 mp08            ansible_ssh_host=86.119.41.246          ansible_user=debian
 mp09            ansible_ssh_host=86.119.41.252          ansible_user=debian
+# mp10 is reserved for instructors, check specific vars
 mp10            ansible_ssh_host=86.119.42.2            ansible_user=debian
 mp11            ansible_ssh_host=86.119.41.253          ansible_user=debian
 mp12            ansible_ssh_host=86.119.40.206          ansible_user=debian
@@ -21,6 +24,7 @@ mp17            ansible_ssh_host=86.119.42.3            ansible_user=debian
 mp18            ansible_ssh_host=86.119.42.7            ansible_user=debian
 mp19            ansible_ssh_host=86.119.40.53           ansible_user=debian
 
+# Grouped by installation bundle
 [ps-testpoint]
 
 [ps-toolkit]
@@ -33,8 +37,6 @@ mp06
 mp07
 mp08
 mp09
-
-[ps-toolkit-beta]
 mp10
 mp11
 mp12
@@ -48,6 +50,20 @@ mp19
 
 [ps-central]
 
+# Grouped by repository
+[staging]
+mp10
+mp11
+mp12
+mp13
+mp14
+mp15
+mp16
+mp17
+mp18
+mp19
+
+# Grouped by location
 [switch-engines]
 mp01
 mp02

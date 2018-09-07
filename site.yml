@@ -1,8 +1,8 @@
-# This a base playbook to install different perfSONAR flavours on a set of machine
+# This a base playbook to install different perfSONAR flavours on a set of machines
+# and make those ready to be used by participants of some workshop.
 ---
 
-# This first task can be replaced by any other provisioning setup
-# you're using on your infrastructure.
+# The two first tasks can be replaced by any other provisioning setup you're using on your infrastructure.
 - name: Bootstrap Ansible on all hosts
   hosts: all
   become: True
@@ -11,32 +11,41 @@
     - role: bootstrap
       tags: 'bootstrap'
 
+- name: User and group provisioning on all hosts
+  hosts: all
+  become: True
+  roles:
+    - role: users
+      tags: 'users'
+
 # From here on, these are perfSONAR related tasks
 - name: Install and configure perfSONAR testpoint nodes
   hosts: ps-testpoint
   become: True
   roles:
     - role: perfsonar-testpoint
+      tags: 'perfsonar'
 
 - name: Install and configure perfSONAR toolkit nodes
-  hosts: ps-toolkit, ps-toolkit-beta
+  hosts: ps-toolkit
   become: True
   roles:
     - role: perfsonar-toolkit
       tags: 'perfsonar'
 
-# Some more specific config
-- name: Some more configuration of the nodes
-  hosts: ps-testpoint, ps-toolkit, ps-toolkit-beta
+# The specific workshop setup part
+- name: eduPERT workshop host setup
+  hosts: ps-testpoint, ps-toolkit
   become: True
   roles:
     - role: edupert
       tags: 'workshop'
 
-# Nagios VM setup
+# Nagios VM setup (as a requirement for the TNC18 eduPERT workshop)
 - name: Nagios VM setup
   hosts: nagios
   become: True
   roles:
     - role: nagios
       tags: [ 'workshop', 'nagios' ]
+

@@ -7,3 +7,6 @@
 [submodule "roles/bootstrap"]
        path = roles/bootstrap
        url = https://github.com/tonin/ansible-role-bootstrap.git
+[submodule "roles/users"]
+	path = roles/users
+	url = https://github.com/tonin/ansible-role-users
