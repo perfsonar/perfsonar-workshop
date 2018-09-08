@@ -11,7 +11,7 @@ The deployment is meant to work with any perfSONAR supported distro:
   - CentOS: http://docs.perfsonar.net/install_centos.html
   - Debian/Ubuntu: http://docs.perfsonar.net/install_debian.html
 
-The hosts will all be managed through Ansible and for that this setup relies on a [fork][tonin-bootstrap] of the [robertdebock.bootstrap][rdbs] role to make all machines working with Ansible.  You can skip that part of the setup and provide your own provisioning roles and playbooks taking care of that in your infrastructure.
+The hosts will all be managed through Ansible and for that this setup relies on a [fork][tonin-bootstrap] of the [robertdebock.bootstrap][rdbs] role to make all machines working with Ansible.  I also make use of a [simple users management role][tonin-users] to create and manage the admin users on the machines.  You can skip that parts of the setup and provide your own provisioning roles and playbooks taking care of that in your infrastructure.
 
 At the core of the `site.yml` playbook are the [perfsonar-testpoint][ps-testpoint] and [perfsonar-toolkit][ps-toolkit] roles which are making most of the job.
 
@@ -20,8 +20,22 @@ Playbook Variables
 
 I usually adapt the following variables for my workshop setups:
 
+  - `edupert_domain` as a fake domain to use between the lab hosts
+  - `edupert_username` as the username that workshop participants will use to connect to the lab hosts
+  - `edupert_timezone` to set a time zone that is the same as where the workshop is happening
+  - `perfsonar_web_passwd` to define the web password used at the perfSONAR GUI
   - `perfsonar_optional_packages` is the list of additional optional packages you want to install with the testpoint bundle, see [the debian list][debian-optional] and [the centos list][centos-optional] for more information.  All optional packages are installed per default.
   - `perfsonar_ntp_servers`: depending on the place where the setup is established, I use close and reliable NTP servers,
+  - and of course the list and characteristics of user accounts.
+
+There is also some provision, in the inventory file as well as in the roles, to use different types of perfSONAR installation, namely: stable, staging or snapshot packages.
+
+Usage
+-----
+
+In its simplest form, this playbook and roles can be used with the following command:
+
+    ansible-playbook site.yml
 
 Tags
 ----
@@ -45,10 +59,12 @@ Examples,
 Dependencies
 ------------
 
-The perfsonar-testpoint and perfsonar-toolkit roles as well as the bootstrap role are the main dependencies to this setup.  Git submodules are used to make for an easy starting point.  This means you have 2 different ways to use this setup:
+The [perfsonar-testpoint][ps-testpoint] and [perfsonar-toolkit][ps-toolkit] roles as well as my [bootstrap][tonin-bootstrap] and [users][tonin-users] roles are the main dependencies to this setup.  Git submodules are used to make for an easy starting point.  This means you have 2 different ways to use this setup:
 
   - use the git submodules, by running `git submodule init; git submodule update` after cloning this repo
   - use Ansible Galaxy (when the perfsonar roles will be published there… which is not yet the case)
+
+Some inventory files are crypted with ansible-vault and the corresponding password is not kept in this git repository, of course!
 
 License
 -------
@@ -58,10 +74,11 @@ Apache 2.0
 Author Information
 ------------------
 
-I'm a [perfSONAR][ps] developer and I provide this Ansible setup for anyone having similar requirements as mine to quickly setup a workshop, training or testing perfSONAR deployment.  Feedback and PR happily received.
+I'm a [perfSONAR][ps] developer and instructor and I provide this Ansible setup for anyone having similar requirements as mine to quickly setup a workshop, training or testing perfSONAR deployment.  Feedback and PR happily received.
 
 
 [tonin-bootstrap]: https://github.com/tonin/ansible-role-bootstrap
+[tonin-users]: https://github.com/tonin/ansible-role-users
 [ps-testpoint]: http://github.com/perfsonar/ansible-role-perfsonar-testpoint
 [ps-toolkit]: https://github.com/tonin/ansible-role-perfsonar-toolkit
 [rdbs]: https://galaxy.ansible.com/robertdebock/bootstrap/

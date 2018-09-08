@@ -8,9 +8,9 @@ vbell off
 # Use alternate screen to display man pages, less output, etc.
 altscreen on
 # 1st screen window is a bash shell with regular user
-screen 1 bash
+screen 1 bash -o vi
 # 2nd screen window is a superuser bash shell
-screen -t root 2 sudo bash
+screen -t root 2 sudo bash -o vi
 # Bind ctrl-a c to creating screen window number 1, to avoid using window 0 which confuses me
 bind c screen 1
 

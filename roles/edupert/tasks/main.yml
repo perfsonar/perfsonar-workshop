@@ -34,6 +34,7 @@
   with_items:
     - bashrc
     - screenrc
+    - vimrc
 
 # Allow password access so that participants can access the machines
 - name: Allow ssh password access

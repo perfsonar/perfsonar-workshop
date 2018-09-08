@@ -2,7 +2,8 @@
 # and make those ready to be used by participants of some workshop.
 ---
 
-# The two first tasks can be replaced by any other provisioning setup you're using on your infrastructure.
+# This first task can be replaced by any other provisioning setup you're using on your infrastructure.
+# Just make sure you can manage the hosts with Ansible
 - name: Bootstrap Ansible on all hosts
   hosts: all
   become: True
@@ -10,13 +11,6 @@
   roles:
     - role: bootstrap
       tags: 'bootstrap'
-
-- name: User and group provisioning on all hosts
-  hosts: all
-  become: True
-  roles:
-    - role: users
-      tags: 'users'
 
 # From here on, these are perfSONAR related tasks
 - name: Install and configure perfSONAR testpoint nodes
@@ -33,8 +27,16 @@
     - role: perfsonar-toolkit
       tags: 'perfsonar'
 
+# User management, can be replaced by any other provisioning setup you're using on your infrastructure
+- name: User and group provisioning on all hosts
+  hosts: all
+  become: True
+  roles:
+    - role: users
+      tags: 'users'
+
 # The specific workshop setup part
-- name: eduPERT workshop host setup
+- name: eduPERT workshop hosts setup
   hosts: ps-testpoint, ps-toolkit
   become: True
   roles:
