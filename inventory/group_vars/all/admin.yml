@@ -1,0 +1,11 @@
+# Some common variables for all systems
+---
+# Set to False if you do not want to disable root ssh yet (i.e. when using root to run ansible)
+perfsonar_disable_root_ssh: True
+
+# This is need for the bootstrap role to work when running ansible as another user
+bootstrap_user: "{{ lookup('env', 'SUDO_USER') }}"
+
+# Our hosts domain
+ps_domain: 'tnc18.pert.edu'
+

@@ -1,0 +1,11 @@
+# Some common perfSONAR settings for all systems
+---
+# Remote psconfig list
+perfsonar_psconfig_remote_remotes:
+  - https://pmp-central.geant.org/pscfg-psmall.json
+
+# perfSONAR toolkit web admin user and password
+# Can usefully be moved in a ansible vault if required.
+perfsonar_web_user: psadmin
+perfsonar_web_passwd: edupert
+

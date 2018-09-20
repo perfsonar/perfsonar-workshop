@@ -1,0 +1,7 @@
+{  
+   "data" : {
+      "measurement-agent" : "{% scheduled_by_address %}",
+      "url" : "http://pmp-central.geant.org/esmond/perfsonar/archive/"
+   },
+   "archiver" : "esmond"
+}

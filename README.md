@@ -20,7 +20,7 @@ Playbook Variables
 
 I usually adapt the following variables for my workshop setups:
 
-  - `edupert_domain` as a fake domain to use between the lab hosts
+  - `ps_domain` as a fake domain to use between the lab hosts (but can also be used to define all your hosts hostname, see playbook/corrections.yml)
   - `edupert_username` as the username that workshop participants will use to connect to the lab hosts
   - `edupert_timezone` to set a time zone that is the same as where the workshop is happening
   - `perfsonar_web_passwd` to define the web password used at the perfSONAR GUI
@@ -42,7 +42,7 @@ It is usually useful to edit the following before running any Ansible command:
   - edit `inventory/hosts`
   - remove any unneeded directory under `inventory/group_vars/` or edit exisiting files
   - remove any unneeded directory under `inventory/host_vars/` or edit exisiting files
-  - change the domain in `inventory/group_vars/all/edupert.yml`
+  - change the domain in `inventory/group_vars/all/perfsonar.yml`
   - change the user list in `inventory/group_vars/all/users.yml`
   - create a vault password in `secret` and remove/create/edit `inventory/group_vars/all/crypt.yml`
 

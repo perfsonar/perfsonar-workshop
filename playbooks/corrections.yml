@@ -1,0 +1,70 @@
+# Some corrections that were needed on perfSONAR systems
+# Those corrections might be outdated or useful in very specific environments only
+#
+# To activate and run only when necessary, for example with calls like:
+# ansible-playbook playbooks/corrections.yml -l mp18 --tags 'central_archiver'
+---
+
+# Distribute an esmond_central.json archiving file to force archiving to central host
+# Check the content of the playbooks/files/esmond-central.json before running this play.
+#
+# This is not needed if pS nodes are configured with the --configure-archives option
+- name: Create central archiver
+  hosts: all
+  become: True
+
+  tasks:
+    - name: Distribute central esmond archiver
+      copy:
+        src: files/esmond-central.json
+        dest: /etc/perfsonar/psconfig/archives.d/
+        owner: perfsonar
+        group: perfsonar
+        mode: 0644
+      tags:
+        - central_archiver
+
+# Correct the perfSONAR firewall rules missing after BWCTL retirements (perfSONAR v4.1.1 only)
+- name: Re-add perfSONAR BWCTL firewall rules
+  hosts: all
+  become: True
+  tags:
+    - bwctl_firewall_rules
+
+  tasks:
+    - name: Create /etc/bwctl-server directory
+      file:
+        path: /etc/bwctl-server
+        state: directory
+        mode: 0755
+
+    - name: Create empty file /etc/bwctl-server/bwctl-server.conf file
+      file:
+        path: /etc/bwctl-server/bwctl-server.conf
+        state: touch
+        mode: 0644
+
+    - name: Re-install perfSONAR firewall rules
+      command: /usr/lib/perfsonar/scripts/configure_firewall install
+
+# Make sure an IPv4 localhost entry exists
+- name: Double check localhost entry and hostname
+  hosts: all
+  become: True
+
+  tasks:
+    - name: Add IPv4 localhost entry in /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        state: 'present'
+        regexp: '^127\.0\.0\.1'
+        line: '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4'
+      tags:
+        - etc_hosts_localhost
+
+    - name: Ensure hostname is defined according to Ansible inventory
+      hostname:
+        name: "{{ inventory_hostname }}.{{ ps_domain }}"
+      tags:
+        - local_hostname
+
