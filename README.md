@@ -18,12 +18,12 @@ At the core of the `site.yml` playbook are the [perfsonar-testpoint][ps-testpoin
 Playbook Variables
 ------------------
 
-I usually adapt the following variables for my workshop setups:
+After checking out this repo and creating a new branch for the specific deployment I'm doing, I usually adapt the following variables for my deployment needs:
 
   - `ps_domain` as a fake domain to use between the lab hosts (but can also be used to define all your hosts hostname, see playbook/corrections.yml)
   - `edupert_username` as the username that workshop participants will use to connect to the lab hosts
   - `edupert_timezone` to set a time zone that is the same as where the workshop is happening
-  - `perfsonar_web_passwd` to define the web password used at the perfSONAR GUI
+  - `perfsonar_web_user`and `perfsonar_web_passwd` to define the define the credential used to access the perfSONAR toolkit admin GUI
   - `perfsonar_optional_packages` is the list of additional optional packages you want to install with the testpoint bundle, see [the debian list][debian-optional] and [the centos list][centos-optional] for more information.  All optional packages are installed per default.
   - `perfsonar_ntp_servers`: depending on the place where the setup is established, I use close and reliable NTP servers,
   - and of course the list and characteristics of user accounts.

@@ -1,0 +1,11 @@
+# Some common variables for edupert machines
+---
+# Participants username
+edupert_username: "surf"
+
+# We manage our own /etc/hosts file for ease of use in workshop
+# See actual content in roles/edupert/task/main.yml
+edupert_manage_hosts_file: true
+
+# The workshop timezone
+edupert_timezone: Europe/Amsterdam
