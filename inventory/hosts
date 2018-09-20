@@ -2,6 +2,8 @@
 # hosts and groups to be managed by this particular inventory.
 
 # Full perfSONAR hosts inventory
+# If you need to use a sudo password it can be useful to give in the ansible-vault crypted file
+# as `ansible_sudo_pass` This can even be done on a per host basis.
 [all]
 mp01            ansible_ssh_host=86.119.36.246          ansible_user=debian
 mp02            ansible_ssh_host=86.119.37.106          ansible_user=debian

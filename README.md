@@ -37,6 +37,15 @@ In its simplest form, this playbook and roles can be used with the following com
 
     ansible-playbook site.yml
 
+It is usually useful to edit the following before running any Ansible command:
+
+  - edit `inventory/hosts`
+  - remove any unneeded directory under `inventory/group_vars/` or edit exisiting files
+  - remove any unneeded directory under `inventory/host_vars/` or edit exisiting files
+  - change the domain in `inventory/group_vars/all/edupert.yml`
+  - change the user list in `inventory/group_vars/all/users.yml`
+  - create a vault password in `secret` and remove/create/edit `inventory/group_vars/all/crypt.yml`
+
 Tags
 ----
 
