@@ -28,7 +28,7 @@
       shell: echo '   ❗️ Check this host disk space ❗️   '; df -lHPT
       register: df
       changed_when: False
-      when: disk_free|failed
+      when: disk_free is failed
 
     - name: Check running kernel version
       shell: kin=$(rpm -q kernel|tail -n 1|sed 's/^kernel-//'); if [ $kin != $(uname -r) ]; then echo "❗️ Pending update to $kin"; fi

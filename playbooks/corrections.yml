@@ -68,3 +68,51 @@
       tags:
         - local_hostname
 
+# Delete /var/www/perfsonar wrongly created on CentOS hosts
+- name: Review local files and directories
+  hosts: all
+  become: True
+
+  tasks:
+    - name: Delete /var/www/perfsonar
+      file:
+        path: /var/www/perfsonar
+        state: absent
+      when: ansible_os_family == "RedHat"
+      tags:
+        - local_files
+
+# Double check security settings
+- name: Double check host security settings for perfSONAR
+  hosts: all
+  become: True
+  tags:
+    - local_firewall
+
+  tasks:
+    - name: Re-install perfSONAR firewall rules
+      command: /usr/lib/perfsonar/scripts/configure_firewall install
+
+    - name: Disable SElinux in current setup
+      command: setenforce Permissive
+
+    - name: Disable SElinux for future reboot
+      command: sed -i -e 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+
+# Check services and daemons
+- name: Check and restart services
+  hosts: all
+  become: True
+  tags:
+    - local_services
+
+  tasks:
+    - name: Restart services after removing psconfig remote
+        # Move this to perfsonar-testpoint role in general?
+      service:
+        name: "{{ item }}"
+        state: restarted
+      with_items:
+        - pscheduler-runner
+        - owamp-server
+

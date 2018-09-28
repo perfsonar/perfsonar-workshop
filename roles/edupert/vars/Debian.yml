@@ -1,3 +1,6 @@
----
 # variables specific to Debian OS family
+---
+
+# HTTP published directory
+public_http_dir: /var/www
 

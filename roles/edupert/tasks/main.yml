@@ -47,10 +47,10 @@
   notify:
     - restart ssh
 
-# Add /var/www/perfsonar/workshop directory
-- name: Create /var/www/perfsonar/workshop
+# Add a HTTP published /perfsonar/workshop directory
+- name: Create {{ public_http_dir }}/perfsonar/workshop
   file:
-      path: /var/www/perfsonar/workshop
+      path: "{{ public_http_dir }}"/perfsonar/workshop
       state: directory
       owner: "{{ edupert_username }}"
       group: "{{ edupert_username }}"
