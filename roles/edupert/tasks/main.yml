@@ -1,5 +1,16 @@
 # General tasks file for the edupert role
 ---
+#####
+# Load OS dependant variables
+#####
+# This needs to be done for all tags, so use the 'always' special tag
+- name: Load variables based on OS type
+  include_vars: "{{ item }}"
+  tags: [ 'always' ]
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
 
 # Add a workshop specific user to be used by participants
 - name: Add and manage eduPERT user account ({{ edupert_username }})
