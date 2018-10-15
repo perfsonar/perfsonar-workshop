@@ -12,6 +12,14 @@
     - role: bootstrap
       tags: 'bootstrap'
 
+# umich bastion setup
+- name: bastion security setup
+  hosts:
+    - techex-umich
+  roles:
+    - role: epcjr.ansible_role_bastion
+  become_method: su
+
 # From here on, these are perfSONAR related tasks
 - name: Install and configure perfSONAR testpoint nodes
   hosts: ps-testpoint
