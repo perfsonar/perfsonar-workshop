@@ -5,85 +5,26 @@
 # If you need to use a sudo password it can be useful to give in the ansible-vault crypted file
 # as `ansible_sudo_pass` This can even be done on a per host basis.
 [all]
-mp01            ansible_ssh_host=86.119.36.246          ansible_user=debian
-mp02            ansible_ssh_host=86.119.37.106          ansible_user=debian
-mp03            ansible_ssh_host=86.119.38.234          ansible_user=debian
-mp04            ansible_ssh_host=86.119.39.24           ansible_user=debian
-mp05            ansible_ssh_host=86.119.41.245          ansible_user=debian
-mp06            ansible_ssh_host=86.119.41.243          ansible_user=debian
-mp07            ansible_ssh_host=86.119.41.240          ansible_user=debian
-mp08            ansible_ssh_host=86.119.41.246          ansible_user=debian
-mp09            ansible_ssh_host=86.119.41.252          ansible_user=debian
-# mp10 is reserved for instructors, check specific vars
-mp10            ansible_ssh_host=86.119.42.2            ansible_user=debian
-mp11            ansible_ssh_host=86.119.41.253          ansible_user=debian
-mp12            ansible_ssh_host=86.119.40.206          ansible_user=debian
-mp13            ansible_ssh_host=86.119.41.247          ansible_user=debian
-mp14            ansible_ssh_host=86.119.41.151          ansible_user=debian
-mp15            ansible_ssh_host=86.119.42.0            ansible_user=debian
-mp16            ansible_ssh_host=86.119.42.6            ansible_user=debian
-mp17            ansible_ssh_host=86.119.42.3            ansible_user=debian
-mp18            ansible_ssh_host=86.119.42.7            ansible_user=debian
-mp19            ansible_ssh_host=86.119.40.53           ansible_user=debian
+mp01            ansible_ssh_host=
+mp02            ansible_ssh_host=
+mp03            ansible_ssh_host=150.254.208.90         ansible_user=antoine
+mp04            ansible_ssh_host=150.254.208.84         ansible_user=antoine
 
 # Grouped by installation bundle
 [ps-testpoint]
+mp01
+mp03
 
 [ps-toolkit]
-mp01
 mp02
-mp03
 mp04
-mp05
-mp06
-mp07
-mp08
-mp09
-mp10
-mp11
-mp12
-mp13
-mp14
-mp15
-mp16
-mp17
-mp18
-mp19
-
-[ps-central]
-
-# Grouped by repository
-[staging]
-mp10
-mp11
-mp12
-mp13
-mp14
-mp15
-mp16
-mp17
-mp18
-mp19
 
 # Grouped by location
-[switch-engines]
+[techex-umich]
 mp01
 mp02
+
+[techex-geant]
 mp03
 mp04
-mp05
-mp06
-mp07
-mp08
-mp09
-mp10
-mp11
-mp12
-mp13
-mp14
-mp15
-mp16
-mp17
-mp18
-mp19
 
