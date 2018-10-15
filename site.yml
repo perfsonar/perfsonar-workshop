@@ -35,19 +35,3 @@
     - role: users
       tags: 'users'
 
-# The specific workshop setup part
-- name: eduPERT workshop hosts setup
-  hosts: ps-testpoint, ps-toolkit
-  become: True
-  roles:
-    - role: edupert
-      tags: 'workshop'
-
-# Nagios VM setup (as a requirement for the TNC18 eduPERT workshop)
-- name: Nagios VM setup
-  hosts: nagios
-  become: True
-  roles:
-    - role: nagios
-      tags: [ 'workshop', 'nagios' ]
-
