@@ -1,6 +1,0 @@
-# variables specific to RedHat OS family
----
-
-# HTTP published directory
-public_http_dir: /var/www/html
-
