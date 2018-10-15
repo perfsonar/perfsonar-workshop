@@ -7,8 +7,8 @@
 [all]
 mp01            ansible_ssh_host=
 mp02            ansible_ssh_host=
-mp03            ansible_ssh_host=150.254.208.90         ansible_user=antoine
-mp04            ansible_ssh_host=150.254.208.84         ansible_user=antoine
+mp03            ansible_ssh_host=150.254.208.90         ansible_user=root
+mp04            ansible_ssh_host=150.254.208.84         ansible_user=root
 
 # Grouped by installation bundle
 [ps-testpoint]
