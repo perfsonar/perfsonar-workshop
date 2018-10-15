@@ -9,7 +9,7 @@
   become: True
   gather_facts: False
   roles:
-    - role: bootstrap
+    - role: ansible-role-bootstrap
       tags: 'bootstrap'
 
 # umich bastion setup
@@ -25,14 +25,14 @@
   hosts: ps-testpoint
   become: True
   roles:
-    - role: perfsonar-testpoint
+    - role: ansible-role-perfsonar-testpoint
       tags: 'perfsonar'
 
 - name: Install and configure perfSONAR toolkit nodes
   hosts: ps-toolkit
   become: True
   roles:
-    - role: perfsonar-toolkit
+    - role: ansible-role-perfsonar-toolkit
       tags: 'perfsonar'
 
 # User management, can be replaced by any other provisioning setup you're using on your infrastructure
@@ -40,6 +40,6 @@
   hosts: all
   become: True
   roles:
-    - role: users
+    - role: ansible-role-users
       tags: 'users'
 
