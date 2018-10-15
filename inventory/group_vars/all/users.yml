@@ -23,6 +23,14 @@ users_accounts:
     dotfiles_repo: 'https://github.com/tonin/osx.dotfiles'
     dotfiles_dest: '~/.config/dotfiles'
     dotfiles_command: '~/.config/dotfiles/deploy.sh'
+  - name: 'epcjr'
+    group: 'pssudo'
+    state: 'present'
+    shell: '/bin/bash'
+    # Debian/Ubuntu groups
+    groups: ['adm', 'staff', 'sudo', 'psadmin', 'pssudo']
+    sshkeys:
+      - ''
 
 # Additional packages to install on all nodes (customise at your will)
 users_additional_packages:
