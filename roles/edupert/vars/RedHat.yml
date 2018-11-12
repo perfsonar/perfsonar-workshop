@@ -1,8 +1,0 @@
-# Variables specific to RedHat OS family
----
-
-# HTTP published directory
-public_http_dir: /var/www/html
-
-# Where files for http://mpXY.ps_domain/perfsonar/workshop need to get published
-edupert_public_dir: /var/www/html/perfsonar/workshop

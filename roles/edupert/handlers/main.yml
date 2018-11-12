@@ -1,8 +1,0 @@
----
-# Handlers file for the edupert role
-
-- name: restart ssh
-  service:
-    name: sshd
-    state: restarted
-

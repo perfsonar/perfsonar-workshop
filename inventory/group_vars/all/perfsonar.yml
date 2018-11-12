@@ -1,12 +1,10 @@
 # Some common perfSONAR settings for all systems
 ---
 # Remote psconfig list
-perfsonar_psconfig_remote_remotes:
-    - { url: 'https://pmp-central.geant.org/pscfg-psmall.json', state: 'present' }
-    - { url: 'https://central.perfsonar.utr.surfcloud.nl/psconfig/astron-latency-mesh.json', state: 'absent' }
+perfsonar_psconfig_remote_remotes: []
 
 # perfSONAR toolkit web admin user and password
 # Can usefully be moved in a ansible vault if required.
 perfsonar_web_user: psadmin
-perfsonar_web_passwd: edupert
+perfsonar_web_passwd: orlando
 

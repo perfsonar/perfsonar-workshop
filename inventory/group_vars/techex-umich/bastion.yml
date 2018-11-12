@@ -1,0 +1,13 @@
+### General settings
+#
+bastion_users:
+  - epcjr
+  - kkit
+bastion_user_group: pssudo
+bastion_jumpboxes:
+  - 141.211.160.28
+bastion_nameservers:
+  - 8.8.8.8
+  - 8.8.8.4
+  - 2001:4860:4860::8888
+  - 2001:4860:4860::8844

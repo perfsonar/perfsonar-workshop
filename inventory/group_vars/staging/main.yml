@@ -1,4 +1,0 @@
-# Staging repo hosts specific variables
----
-# We want to run the packages from the staging repo
-perfsonar_release: staging

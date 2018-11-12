@@ -1,0 +1,8 @@
+# Install bastion
+- src: epcjr.ansible_role_bastion
+
+# Install perfsonar roles
+- src: https://github.com/perfsonar/ansible-role-perfsonar-testpoint
+- src: https://github.com/perfsonar/ansible-role-perfsonar-toolkit
+- src: https://github.com/tonin/ansible-role-bootstrap
+- src: https://github.com/tonin/ansible-role-users
