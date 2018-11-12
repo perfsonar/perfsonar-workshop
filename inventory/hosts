@@ -28,3 +28,10 @@ mp02
 mp03
 mp04
 
+# Grouped by perfSONAR repository
+[staging]
+mp04
+
+[snapshot]
+mp02
+

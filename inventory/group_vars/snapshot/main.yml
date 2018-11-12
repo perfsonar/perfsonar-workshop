@@ -1,0 +1,4 @@
+# Snapshot repo hosts specific variables
+---
+# We want to run the packages from the snapshot/nightly repo
+perfsonar_release: snapshot
