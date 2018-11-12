@@ -1,0 +1,6 @@
+# Install perfsonar roles
+- src: https://github.com/perfsonar/ansible-role-perfsonar-testpoint
+- src: https://github.com/perfsonar/ansible-role-perfsonar-toolkit
+# Install additional provisioning roles
+- src: https://github.com/tonin/ansible-role-bootstrap
+- src: https://github.com/tonin/ansible-role-users
