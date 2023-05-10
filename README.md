@@ -1,3 +1,5 @@
+# THIS REPOSITORY IS OUTDATED AND WILL BE REMOVED. Please use https://github.com/perfsonar/ansible-playbook-perfsonar instead
+
 perfSONAR deployment example / quickstart
 =========================================
 
